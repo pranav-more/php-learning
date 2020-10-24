@@ -13,7 +13,7 @@
       <div class="container mt-5">
       <form action="customers.php" method="get">
           <div class="form-group col-4">
-              <input type="text" class='form-control' name="customerID" id="customerID">
+              <input type="text" class='form-control' name="customerID" id="customerID" value="<?php if( isset($_GET['customerID'])){ echo $_GET['customerID']; } ?>">
                 <button class="btn btn-primary mt-2">Search</button>
             </div>
       </form>
@@ -33,7 +33,7 @@
 
                     include "conn.php";
                     
-                    if(isset($_GET['customerID'])){
+                    if(isset($_GET['customerID']) && $_GET['customerID']!=''){
                         $customerID = $_GET['customerID'];
                         $query = "select * from customers where id='$customerID'";
                     }
@@ -42,6 +42,8 @@
                     }
 
                     $result = mysqli_query($conn, $query);
+                    // to count number of customers
+                    $count = mysqli_num_rows($result);
 
                     while ( $row = mysqli_fetch_assoc($result)){
                         ?>
@@ -59,6 +61,14 @@
                     ?>
             </tbody>
         </table>
+        <?php
+            if($count>1){
+                echo '<br>' . $count . 'customers<br>';
+            }
+            else{
+                echo '<br>' . $count . 'customer<br>';
+            }
+        ?>
 
       </div>
     <!-- Optional JavaScript -->
