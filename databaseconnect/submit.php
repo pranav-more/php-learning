@@ -5,14 +5,9 @@ if( isset($_POST['submit']) ) {
     $userName = $_POST['name'];
     $userEmail = $_POST['email'];
     $userCity = $_POST['city'];
-    // 
-    $servername = 'localhost'; 
-    $user = 'root';
-    $password = 'advance18';
-    $dbname = 'learning';
+   
     //connection
-    $conn = mysqli_connect($servername, $user, $password, $dbname);
-    if ( $conn ){
+    include "conn.php";
         $query = "insert into customers (name, email, city) values ('$userName', '$userEmail', '$userCity')";
         $result = mysqli_query($conn, $query);
         if ($result){
@@ -20,11 +15,9 @@ if( isset($_POST['submit']) ) {
         }else{
             echo 'some error while insterting';
         }
+    
+   
     }
-    else{
-        echo "not connected:<";
-    }
-}
 else{
     echo "not allowed";
 }
