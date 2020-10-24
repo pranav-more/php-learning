@@ -13,7 +13,7 @@
       <div class="container mt-5">
       <form action="customers.php" method="get">
           <div class="form-group col-4">
-              <input type="text" class='form-control' name="customerID" id="customerID" value="<?php if( isset($_GET['customerID'])){ echo $_GET['customerID']; } ?>">
+              <input type="text" class='form-control' name="search" id="search" placeholder="Search" value="<?php if( isset($_GET['search'])){ echo $_GET['search']; } ?>">
                 <button class="btn btn-primary mt-2">Search</button>
             </div>
       </form>
@@ -33,9 +33,9 @@
 
                     include "conn.php";
                     
-                    if(isset($_GET['customerID']) && $_GET['customerID']!=''){
-                        $customerID = $_GET['customerID'];
-                        $query = "select * from customers where id='$customerID'";
+                    if(isset($_GET['search']) && $_GET['search']!=''){
+                        $search_string = $_GET['search'];
+                        $query = "select * from customers where name like '%$search_string%'";
                     }
                     else{
                         $query = "select * from customers";
