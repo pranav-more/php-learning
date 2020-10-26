@@ -25,6 +25,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>City</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +36,7 @@
                     
                     if(isset($_GET['search']) && $_GET['search']!=''){
                         $search_string = $_GET['search'];
-                        $query = "select * from customers where name like '%$search_string%'";
+                        $query = "select * from customers where name like '%$search_string%' or email like '%$search_string%' or city like '%$search_string%' or id like '%$search_string%'";
                     }
                     else{
                         $query = "select * from customers";
@@ -52,6 +53,10 @@
                     <td><?php echo $row['name']; ?></td>
                     <td><?php echo $row['email']; ?></td>
                     <td><?php echo $row['city']; ?></td>
+                    <td>
+                        <a href="form.php?ID=<?php echo $row['ID']; ?>"><button type="button" id="" class="btn btn-light btn-sm">Update</button></a>
+                        <button type="button" id="" class="btn btn-danger btn-sm">Delete</button>
+                    </td>
                     
                     </tr>
   

@@ -1,3 +1,19 @@
+<?php
+  if(isset($_GET['ID']) && $_GET['ID']!=''){
+    $ID = $_GET['ID'];
+    include "conn.php";
+    $query = "SELECT * from customers where id = '$ID'";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) == 1){
+      $customer = mysqli_fetch_assoc($result);
+    }
+    else{
+      echo "error, customer not found"; 
+    }
+  }
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,21 +27,22 @@
   </head>
   <body>
       <div class="container">
-  <form action="submit.php" method="POST">        
-      <div class="form-group">
+  <form action="<?php if (isset($customer)){echo 'update.php';}else{ echo 'submit.php';} ?>" method="POST">        
+    <input type="text" name="ID" value="<?php if( isset($customer)){echo $customer['ID'];} ?>" style="display:none;" >   
+  <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" name="name" class="form-control" id="exampleInputPassword1" placeholder="Enter name">
+        <input type="text" name="name" class="form-control" id="exampleInputPassword1" placeholder="Enter name" value="<?php if (isset($customer)){ echo $customer['name'];} ?>">
       </div>
   <div class="form-group">
     <label for="email">Email address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php if (isset($customer)){ echo $customer['email'];} ?>">
   </div>
   <div class="form-group">
     <label for="city">City:</label>
-    <input type="text" name="city" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter city">
+    <input type="text" name="city" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter city" value="<?php if (isset($customer)){ echo $customer['city'];} ?>">
   </div>
 
-  <input type="submit" value="submit" name="submit" class="btn btn-primary">
+  <input type="submit" value="<?php if ( isset($customer)){echo 'Update';}else { echo 'Submit';} ?>" name="submit" class="btn btn-primary">
 </form>
 </div>
     <!-- Optional JavaScript -->
