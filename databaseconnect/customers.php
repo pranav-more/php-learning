@@ -55,7 +55,7 @@
                     <td><?php echo $row['city']; ?></td>
                     <td>
                         <a href="form.php?ID=<?php echo $row['ID']; ?>"><button type="button" id="" class="btn btn-light btn-sm">Update</button></a>
-                        <button type="button" id="" class="btn btn-danger btn-sm">Delete</button>
+                        <a href="delete.php?ID=<?php echo $row['ID']; ?>"><button type="button" id="" class="btn btn-danger btn-sm">Delete</button></a>
                     </td>
                     
                     </tr>
