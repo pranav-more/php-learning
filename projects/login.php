@@ -35,7 +35,8 @@ if (isset($_POST['submit'])){
 
     <title>Order management system</title>
   </head>
-  <body style="display:grid; min-height:100vh;place-items: center;">
+  <body style="display:grid; min-height:70vh;place-items: center;">
+  <h1>Login</h1>
   <form action="login.php" method="POST">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>

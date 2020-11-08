@@ -1,37 +1,37 @@
-
-
-
-
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-      <div class="container">
-  <table class="table table-striped table-dark">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div class="container">
+    <table class="table table-striped table-dark">
+      <div class='d-flex justify-content-between'>
       <h1>Your orders!</h1>
-  <thead>
-    <tr>
-      <th scope="col">order_id</th>
-      <th scope="col">customer_id</th>
-      <th scope="col">product_name</th>
-      <th scope="col">product_description</th>
-      <th scope="col">product_price</th>
-      <th scope="col">product_quantity</th>
-      <th scope="col">payment_mode</th>
-      <th scope="col">order_status</th>
-    </tr>
-  </thead>
-  <tbody>
-      <?php
+      <a href="neworders.php"><button type="button" id="" class="btn btn-dark btn-lg m-2">New order</button></a>
+      </div>
+      <thead>
+        <tr>
+
+          <th scope="col">product_name</th>
+          <th scope="col">product_description</th>
+          <th scope="col">product_price</th>
+          <th scope="col">product_quantity</th>
+          <th scope="col">payment_mode</th>
+          <th scope="col">order_status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
         include "connection.php";
 
         $query = "select * from orders";
@@ -40,36 +40,38 @@
         // to count number of customers
         $count = mysqli_num_rows($result);
 
-        while ( $row = mysqli_fetch_assoc($result)){
+        while ($row = mysqli_fetch_assoc($result)) {
 
-      ?>
-    <tr>
-      <td><?php echo $row['order_id']; ?></td>
-      <td><?php echo $row['customer_id']; ?></td>
-      <td><?php echo $row['product_name']; ?></td>
-      <td><?php echo $row['product_description']; ?></td>
-      <td><?php echo $row['product_price']; ?></td>
-      <td><?php echo $row['product_quantity']; ?></td>
-      <td><?php echo $row['payment_mode']; ?></td>
-      <td><?php echo $row['order_status']; ?></td>
-      
-    </tr>
-    <?php
+        ?>
+          <tr>
+
+            <td><?php echo $row['product_name']; ?></td>
+            <td><?php echo $row['product_description']; ?></td>
+            <td><?php echo $row['product_price']; ?></td>
+            <td><?php echo $row['product_quantity']; ?></td>
+            <td><?php echo $row['payment_mode']; ?></td>
+            <td><?php echo $row['order_status']; ?></td>
+            <td>
+              <a href="update.php?order_id=<?php echo $row['order_id']; ?>"><button type="button" id="" class="btn btn-light btn-sm">Update</button></a>
+            </td>
+            <td><a href="delete.php?order_id=<?php echo $row['order_id']; ?>"><button type="button" id="" class="btn btn-danger btn-sm">Delete</button></a>
+            </td>
+
+          </tr>
+        <?php
         }
-    ?>
+        ?>
 
-  </tbody>
-</table>
-</div>
+      </tbody>
+    </table>
+    <a href="logout.php"><button type="button" id="" class="btn btn-danger btn-lg m-3">Log out</button></a>
+  </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
 </html>
-
-
-
-

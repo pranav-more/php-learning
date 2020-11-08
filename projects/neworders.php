@@ -1,15 +1,27 @@
 <?php
     session_start();
     if( isset($_SESSION['email'])){
+        include "connection.php";
+        $email = $_SESSION['email'];
         if(isset($_POST['submit'])){
             $productName = $_POST['productName'];
-            $productDescription = $_POST['productDescription'];
             $productDescription = $_POST['productDescription'];
             $productPrice = $_POST['productPrice'];
             $productQantity = $_POST['productQantity'];
             $payment_mode = $_POST['payment_mode'];
 
-            include "connection.php";
+            $query1 = "SELECT * from customers where email='$email'";
+            $result1 = mysqli_query($conn, $query1);
+            $customer = mysqli_fetch_assoc($result1);
+            $customerID = $customer['ID'];
+            $query2 = "INSERT INTO orders(customer_id, product_name, product_description, product_price, product_quantity, payment_mode) VALUES('$customerID', '$productName', '$productDescription', '$productPrice', '$productQantity', '$payment_mode')";
+            $result2 = mysqli_query($conn, $query2);
+            if ($result2){
+                header("location: orders.php");
+            }
+            else{
+                echo 'error';
+            }
         }
 
     
